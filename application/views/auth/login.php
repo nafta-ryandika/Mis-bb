@@ -11,7 +11,7 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="<?= base_url('assets/'); ?>img/logo_mmp.png" alt="...">
+                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="<?= base_url('assets/'); ?>img/logo_bb.png" alt="...">
                                 </div>
                                 <div class="text-center mb-3">
                                     <b style="font-size: 30px;">Management</b><a style="font-size: 24px;"> Information System</a>
@@ -26,7 +26,7 @@
                                         <input type="password" class="form-control form-control-user" id="inPassword" name="inPassword" placeholder="Password">
                                         <?= form_error('inPassword', '<small class="text-danger pl-3">', '</small>') ?>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    <button type="submit" class="btn btn-warning btn-user btn-block">
                                         Login
                                     </button>
                                 </form>
