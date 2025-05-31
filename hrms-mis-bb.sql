@@ -16,10 +16,12 @@
 
 
 -- Dumping database structure for hrms
+DROP DATABASE IF EXISTS `hrms`;
 CREATE DATABASE IF NOT EXISTS `hrms` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `hrms`;
 
 -- Dumping structure for table hrms.tb_m_dept
+DROP TABLE IF EXISTS `tb_m_dept`;
 CREATE TABLE IF NOT EXISTS `tb_m_dept` (
   `UCode_Dept` varchar(16) NOT NULL,
   `Kode_Dept` varchar(25) NOT NULL,
@@ -130,6 +132,7 @@ INSERT INTO `tb_m_dept` (`UCode_Dept`, `Kode_Dept`, `Nama_Dept`, `Ucode_div`, `S
 	('11340000000128', '01.02.00', 'Supply Chain', '11330000000001', 'Aktif', 'Terbuka', 99999, NULL, NULL, NULL, '10110000000001', '2024-08-14 09:39:19.970');
 
 -- Dumping structure for table hrms.tb_m_div
+DROP TABLE IF EXISTS `tb_m_div`;
 CREATE TABLE IF NOT EXISTS `tb_m_div` (
   `UCode_Div` varchar(16) NOT NULL,
   `Kode_Div` varchar(25) NOT NULL,
@@ -161,6 +164,7 @@ INSERT INTO `tb_m_div` (`UCode_Div`, `Kode_Div`, `Nama_Div`, `Ucode_mu`, `Alm_Di
 	('11330000000004', 'OS', 'Outsourcing', '11030000000001', NULL, NULL, NULL, NULL, NULL, 'Aktif', 'Terbuka', 99999, NULL, NULL, NULL, '110000000000', '2020-02-06 15:44:46.600');
 
 -- Dumping structure for table hrms.tb_m_jbt
+DROP TABLE IF EXISTS `tb_m_jbt`;
 CREATE TABLE IF NOT EXISTS `tb_m_jbt` (
   `UCode_Jbt` varchar(16) NOT NULL,
   `Kode_Jbt` varchar(25) NOT NULL,
@@ -198,6 +202,7 @@ INSERT INTO `tb_m_jbt` (`UCode_Jbt`, `Kode_Jbt`, `Nama_Jbt`, `No_intern`, `Lvl_J
 	('11360000000013', 'CM0001', 'Co Manager', '001001001001002000000000000000000000000000000000000000000000', 5, 'Aktif', 'Terbuka', 99999, NULL, NULL, NULL, NULL, '2021-01-27 15:26:33.370');
 
 -- Dumping structure for table hrms.tb_m_kry
+DROP TABLE IF EXISTS `tb_m_kry`;
 CREATE TABLE IF NOT EXISTS `tb_m_kry` (
   `UCode_Kry` varchar(16) NOT NULL,
   `Kode_Kry` varchar(25) NOT NULL,
@@ -280,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `tb_m_kry` (
   UNIQUE KEY `UQ__tb_m_Kry__1BE81D6E` (`Kode_Kry`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table hrms.tb_m_kry: ~4,034 rows (approximately)
+-- Dumping data for table hrms.tb_m_kry: ~4,165 rows (approximately)
 DELETE FROM `tb_m_kry`;
 INSERT INTO `tb_m_kry` (`UCode_Kry`, `Kode_Kry`, `Nama_Kry`, `Barcode`, `Alm`, `Kota`, `Tlp`, `HP`, `Alm_Asal`, `Kota_Asal`, `Tlp_Asal`, `CP`, `Jns_Kelamin`, `Gbr`, `Tgl_Masuk`, `Tgl_Efektif`, `Tgl_Keluar`, `Stat_Kry`, `Stat_Kerja`, `Masa_Kontrak`, `WNA`, `Serikat_Kerja`, `No_ID`, `Tempat_Lahir`, `Tgl_Lahir`, `Stat_Nikah`, `Agama`, `Ucode_Pddk`, `Ucode_Div`, `Ucode_Dept`, `Ucode_Sec`, `Ucode_Jbt`, `Ucode_Grade`, `Stat_Shift`, `Ucode_Shift`, `Ucode_Grp_Shift`, `Nama_Pasangan`, `Tempat_Lahir_Pasangan`, `Tgl_Lahir_Pasangan`, `Pekerjaan_Pasangan`, `Nama_Ayah_Pasangan`, `Nama_Ibu_Pasangan`, `Nama_Ayah`, `Nama_Ibu`, `Pekerjaan_Ayah`, `Pekerjaan_Ibu`, `Alamat_Ayah`, `Alamat_Ibu`, `Stat_Jamsostek`, `Stat_Jmn_Kecelakaan`, `Stat_Kematian`, `No_ASTEK`, `Tgl_ASTEK`, `Stat_Pensiun`, `No_Pensiun`, `Tgl_Pensiun`, `Stat_Awal`, `Stat`, `Stat_Akun`, `Urut_Cetak`, `Field1`, `Field2`, `Ket`, `UCode_Pembuat`, `Tgl_Jam_Buat`, `Ucode_Gol_Gaji`, `OJT1_Mulai`, `OJT1_Selesai`, `OJT2_Mulai`, `OJT2_Selesai`, `OJT3_Mulai`, `OJT3_Selesai`, `ucode_grp_kerja`, `No_RFID`, `stat_rfid`, `tgl_register_rfid`, `tgl_kadaluwarsa_rfid`) VALUES
 	('11530000348568', '001022', 'Yahya', '1022', 'KEPUHREJO RT.01 RW13 GUNUNGGANGSIR BEJI', 'PASURUAN', NULL, '081330364845', NULL, NULL, NULL, NULL, 'Pria', 'D:\\Foto Karyawan untuk ID\\yahya.JPG', '1992-10-01 00:00:00.000', '1992-10-01 00:00:00.000', NULL, 'Tetap', 'Bulanan', NULL, 'Tidak', 'Ya', '351413030468 0001', 'PASURUAN', '1968-04-03 00:00:00.000', 'Menikah', 'ISLAM', '11400000000004', '11330000000001', '11340000000014', '11350000000117', '11360000000005', '11500000000002', 'Shift', '11510000000253', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Ya', 'Ya', 'Ya', NULL, NULL, 'Tidak', NULL, NULL, 'Terbuka', 'Aktif', 'Terbuka', 99999, NULL, NULL, NULL, '110000000000', '2010-09-22 10:54:28.760', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0003196526', 'Aktif', NULL, NULL),
@@ -4454,6 +4459,7 @@ INSERT INTO `tb_m_kry` (`UCode_Kry`, `Kode_Kry`, `Nama_Kry`, `Barcode`, `Alm`, `
 	('21530000353323', '380222', 'Dukha', '380222', 'Kepuhrejo Rt.01 Rw.13 Gunung Gangsir Beji Pasuruan', 'Pasuruan', NULL, NULL, NULL, NULL, NULL, NULL, 'Pria', 'D:\\FOTO ID CARD\\ANAK BARU PT\\blm cetak\\380222.jpg', '2011-03-01 00:00:00.000', '2011-03-01 00:00:00.000', NULL, 'Percobaan', 'Kontrak', '2025-09-26 00:00:00.000', 'Tidak', 'Ya', '351413100974 0003', 'Pasuruan', '1974-09-10 00:00:00.000', 'Menikah', 'Islam', '11400000000003', '11330000000001', '11340000000016', '11350000000026', '11360000000009', '11500000000001', 'Shift', '11510000000027', NULL, 'Maria Ulfa', 'Pasuruan', '1975-04-01 17:58:00.880', 'Karyawan Swasta', 'Asmat', 'Rusmiati ( Alm )', 'Matarip', 'Bana', 'Petani', 'Ibu Rumah Tangga', 'Kepuhrejo', 'Kepuhrejo', 'Tidak', 'Tidak', 'Tidak', NULL, NULL, 'Tidak', NULL, NULL, 'Tertutup', 'Aktif', 'Terbuka', 9999, NULL, NULL, NULL, '110000000000', '2011-03-03 11:16:17.640', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000120976', 'Aktif', NULL, NULL);
 
 -- Dumping structure for table hrms.tb_m_sec
+DROP TABLE IF EXISTS `tb_m_sec`;
 CREATE TABLE IF NOT EXISTS `tb_m_sec` (
   `UCode_Sec` varchar(16) NOT NULL,
   `Kode_Sec` varchar(25) NOT NULL,
@@ -4673,10 +4679,12 @@ INSERT INTO `tb_m_sec` (`UCode_Sec`, `Kode_Sec`, `Nama_Sec`, `Ucode_dept`, `Stat
 
 
 -- Dumping database structure for mis-bb
+DROP DATABASE IF EXISTS `mis-bb`;
 CREATE DATABASE IF NOT EXISTS `mis-bb` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mis-bb`;
 
 -- Dumping structure for table mis-bb.m_access
+DROP TABLE IF EXISTS `m_access`;
 CREATE TABLE IF NOT EXISTS `m_access` (
   `id` int NOT NULL AUTO_INCREMENT,
   `role_id` int DEFAULT NULL,
@@ -4706,6 +4714,7 @@ INSERT INTO `m_access` (`id`, `role_id`, `menu_id`, `created_by`, `created_at`) 
 	(29, 6, 8, NULL, '2024-05-23 23:27:36');
 
 -- Dumping structure for table mis-bb.m_audit_employee
+DROP TABLE IF EXISTS `m_audit_employee`;
 CREATE TABLE IF NOT EXISTS `m_audit_employee` (
   `id` varchar(16) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `card` varchar(16) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
@@ -4728,6 +4737,7 @@ CREATE TABLE IF NOT EXISTS `m_audit_employee` (
 DELETE FROM `m_audit_employee`;
 
 -- Dumping structure for table mis-bb.m_audit_shift
+DROP TABLE IF EXISTS `m_audit_shift`;
 CREATE TABLE IF NOT EXISTS `m_audit_shift` (
   `id` int NOT NULL AUTO_INCREMENT,
   `start` time DEFAULT NULL,
@@ -4747,6 +4757,7 @@ INSERT INTO `m_audit_shift` (`id`, `start`, `end`, `created_by`, `created_at`) V
 	(5, '22:00:00', '07:00:00', 'administrator', '2024-01-30 11:29:27');
 
 -- Dumping structure for table mis-bb.m_audit_status
+DROP TABLE IF EXISTS `m_audit_status`;
 CREATE TABLE IF NOT EXISTS `m_audit_status` (
   `id` int NOT NULL AUTO_INCREMENT,
   `status` int DEFAULT NULL COMMENT '0 : Non Active; 1 : Active;',
@@ -4762,6 +4773,7 @@ INSERT INTO `m_audit_status` (`id`, `status`, `remark`, `created_by`, `created_a
 	(6, 0, 'exit permit', 'administrator', '2025-05-27 08:54:42');
 
 -- Dumping structure for table mis-bb.m_company
+DROP TABLE IF EXISTS `m_company`;
 CREATE TABLE IF NOT EXISTS `m_company` (
   `id` int NOT NULL AUTO_INCREMENT,
   `company` varchar(256) DEFAULT NULL,
@@ -4776,6 +4788,7 @@ INSERT INTO `m_company` (`id`, `company`, `created_by`, `created_at`) VALUES
 	(1, 'PT MEGA MARINE PRIDE', 'administrator', '2024-01-30 11:13:48');
 
 -- Dumping structure for table mis-bb.m_department
+DROP TABLE IF EXISTS `m_department`;
 CREATE TABLE IF NOT EXISTS `m_department` (
   `id` int NOT NULL AUTO_INCREMENT,
   `department` varchar(256) DEFAULT NULL,
@@ -4815,6 +4828,7 @@ INSERT INTO `m_department` (`id`, `department`, `created_by`, `created_at`) VALU
 	(26, 'Supply Chain', 'administrator', '2025-05-16 11:33:00');
 
 -- Dumping structure for table mis-bb.m_division
+DROP TABLE IF EXISTS `m_division`;
 CREATE TABLE IF NOT EXISTS `m_division` (
   `id` int NOT NULL AUTO_INCREMENT,
   `department_id` int NOT NULL,
@@ -4921,6 +4935,7 @@ INSERT INTO `m_division` (`id`, `department_id`, `division`, `created_by`, `crea
 	(92, 26, 'Supply Chain', 'administrator', '2025-05-16 11:34:17');
 
 -- Dumping structure for table mis-bb.m_employee
+DROP TABLE IF EXISTS `m_employee`;
 CREATE TABLE IF NOT EXISTS `m_employee` (
   `id` varchar(16) NOT NULL,
   `card` varchar(16) DEFAULT NULL,
@@ -8070,6 +8085,7 @@ INSERT INTO `m_employee` (`id`, `card`, `name`, `company_id`, `department_id`, `
 	('437152', '', 'Reni Dwi Jayanti', 1, 2, 50, 10, 'administrator', '2024-05-18 16:13:52');
 
 -- Dumping structure for table mis-bb.m_menu
+DROP TABLE IF EXISTS `m_menu`;
 CREATE TABLE IF NOT EXISTS `m_menu` (
   `id` int NOT NULL AUTO_INCREMENT,
   `menu` varchar(128) DEFAULT NULL,
@@ -8092,6 +8108,7 @@ INSERT INTO `m_menu` (`id`, `menu`, `status`, `created_by`, `created_at`) VALUES
 	(8, 'Vote', 1, 'admin', '2024-05-21 10:20:41');
 
 -- Dumping structure for table mis-bb.m_necessity
+DROP TABLE IF EXISTS `m_necessity`;
 CREATE TABLE IF NOT EXISTS `m_necessity` (
   `id` int NOT NULL AUTO_INCREMENT,
   `necessity` varchar(256) DEFAULT NULL,
@@ -8111,6 +8128,7 @@ INSERT INTO `m_necessity` (`id`, `necessity`, `status`, `created_by`, `created_a
 	(5, 'Lain - lain', 1, 'administrator', '2024-01-30 11:27:27');
 
 -- Dumping structure for table mis-bb.m_position
+DROP TABLE IF EXISTS `m_position`;
 CREATE TABLE IF NOT EXISTS `m_position` (
   `id` int NOT NULL AUTO_INCREMENT,
   `position` varchar(256) DEFAULT NULL,
@@ -8136,6 +8154,7 @@ INSERT INTO `m_position` (`id`, `position`, `created_by`, `created_at`) VALUES
 	(12, 'OPERATOR BORONGAN', 'administrator', '2024-01-31 10:45:26');
 
 -- Dumping structure for table mis-bb.m_role
+DROP TABLE IF EXISTS `m_role`;
 CREATE TABLE IF NOT EXISTS `m_role` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `role` varchar(256) DEFAULT NULL,
@@ -8155,6 +8174,7 @@ INSERT INTO `m_role` (`id`, `role`, `created_by`, `created_at`) VALUES
 	(6, 'Vote', 'admin', '2024-05-23 23:26:56');
 
 -- Dumping structure for table mis-bb.m_submenu
+DROP TABLE IF EXISTS `m_submenu`;
 CREATE TABLE IF NOT EXISTS `m_submenu` (
   `id` int NOT NULL AUTO_INCREMENT,
   `menu_id` int DEFAULT NULL,
@@ -8182,6 +8202,7 @@ INSERT INTO `m_submenu` (`id`, `menu_id`, `title`, `url`, `icon`, `status`, `cre
 	(12, 8, 'E Vote', 'vote', 'fas fa-fw fa-square-check', 1, NULL, '2024-05-21 10:23:38');
 
 -- Dumping structure for table mis-bb.m_token
+DROP TABLE IF EXISTS `m_token`;
 CREATE TABLE IF NOT EXISTS `m_token` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` varchar(16) NOT NULL,
@@ -8198,6 +8219,7 @@ INSERT INTO `m_token` (`id`, `user_id`, `token`, `created_at`) VALUES
 	(5, 'coba', 'L8Ba28doMtle31D4CdTIIbdBao4/Qal2koZ8+GyhHzY=', '2024-01-04 08:45:58');
 
 -- Dumping structure for table mis-bb.m_user
+DROP TABLE IF EXISTS `m_user`;
 CREATE TABLE IF NOT EXISTS `m_user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` varchar(16) DEFAULT NULL,
@@ -8229,6 +8251,7 @@ INSERT INTO `m_user` (`id`, `user_id`, `name`, `email`, `image`, `password`, `co
 	(27, 'vote', 'vote', '', 'default.png', '$2y$10$2c08SzztPfP2Rd1Tij37HeGgbqpOE54mksVgF/IWwiMuSE/3QRAjC', 1, 20, 38, 6, 1, 'admin', '2024-05-23 23:31:11');
 
 -- Dumping structure for table mis-bb.m_vote
+DROP TABLE IF EXISTS `m_vote`;
 CREATE TABLE IF NOT EXISTS `m_vote` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `vote` varchar(256) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
@@ -8238,10 +8261,11 @@ CREATE TABLE IF NOT EXISTS `m_vote` (
   KEY `vote` (`vote`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table mis-bb.m_vote: ~2 rows (approximately)
+-- Dumping data for table mis-bb.m_vote: ~0 rows (approximately)
 DELETE FROM `m_vote`;
 
 -- Dumping structure for table mis-bb.m_vote_candidate
+DROP TABLE IF EXISTS `m_vote_candidate`;
 CREATE TABLE IF NOT EXISTS `m_vote_candidate` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `vote_id` int DEFAULT NULL,
@@ -8257,10 +8281,11 @@ CREATE TABLE IF NOT EXISTS `m_vote_candidate` (
   KEY `no` (`no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table mis-bb.m_vote_candidate: ~8 rows (approximately)
+-- Dumping data for table mis-bb.m_vote_candidate: ~0 rows (approximately)
 DELETE FROM `m_vote_candidate`;
 
 -- Dumping structure for table mis-bb.m_vote_location
+DROP TABLE IF EXISTS `m_vote_location`;
 CREATE TABLE IF NOT EXISTS `m_vote_location` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `vote_id` int DEFAULT NULL,
@@ -8272,10 +8297,11 @@ CREATE TABLE IF NOT EXISTS `m_vote_location` (
   KEY `vote` (`vote_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table mis-bb.m_vote_location: ~5 rows (approximately)
+-- Dumping data for table mis-bb.m_vote_location: ~0 rows (approximately)
 DELETE FROM `m_vote_location`;
 
 -- Dumping structure for table mis-bb.m_vote_participant
+DROP TABLE IF EXISTS `m_vote_participant`;
 CREATE TABLE IF NOT EXISTS `m_vote_participant` (
   `id` varchar(16) NOT NULL,
   `vote_id` int DEFAULT NULL,
@@ -8293,10 +8319,11 @@ CREATE TABLE IF NOT EXISTS `m_vote_participant` (
   KEY `status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table mis-bb.m_vote_participant: ~2,745 rows (approximately)
+-- Dumping data for table mis-bb.m_vote_participant: ~0 rows (approximately)
 DELETE FROM `m_vote_participant`;
 
 -- Dumping structure for table mis-bb.m_vote_participant_original
+DROP TABLE IF EXISTS `m_vote_participant_original`;
 CREATE TABLE IF NOT EXISTS `m_vote_participant_original` (
   `id` varchar(16) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `vote_id` int DEFAULT NULL,
@@ -8321,6 +8348,7 @@ CREATE TABLE IF NOT EXISTS `m_vote_participant_original` (
 DELETE FROM `m_vote_participant_original`;
 
 -- Dumping structure for table mis-bb.t_audit_exit_permit
+DROP TABLE IF EXISTS `t_audit_exit_permit`;
 CREATE TABLE IF NOT EXISTS `t_audit_exit_permit` (
   `id` int NOT NULL AUTO_INCREMENT,
   `employee_id` varchar(16) DEFAULT NULL,
@@ -8345,10 +8373,11 @@ CREATE TABLE IF NOT EXISTS `t_audit_exit_permit` (
   KEY `status` (`status`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table mis-bb.t_audit_exit_permit: ~451 rows (approximately)
+-- Dumping data for table mis-bb.t_audit_exit_permit: ~0 rows (approximately)
 DELETE FROM `t_audit_exit_permit`;
 
 -- Dumping structure for table mis-bb.t_exit_permit
+DROP TABLE IF EXISTS `t_exit_permit`;
 CREATE TABLE IF NOT EXISTS `t_exit_permit` (
   `id` int NOT NULL AUTO_INCREMENT,
   `employee_id` varchar(16) DEFAULT NULL,
@@ -8373,12 +8402,13 @@ CREATE TABLE IF NOT EXISTS `t_exit_permit` (
   KEY `status` (`status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table mis-bb.t_exit_permit: ~2,765 rows (approximately)
+-- Dumping data for table mis-bb.t_exit_permit: ~1 rows (approximately)
 DELETE FROM `t_exit_permit`;
 INSERT INTO `t_exit_permit` (`id`, `employee_id`, `date_in`, `time_in`, `date_out`, `time_out`, `necessity_id`, `remark`, `status`, `created_by`, `created_at`, `log_by`, `log_at`) VALUES
 	(1, '377161', '2025-05-30', '17:28:12', '2025-05-30', '17:27:57', 1, 'test', 1, 'admin', '2025-05-30 17:28:00', 'admin', '2025-05-30 17:28:12');
 
 -- Dumping structure for table mis-bb.t_vote_count
+DROP TABLE IF EXISTS `t_vote_count`;
 CREATE TABLE IF NOT EXISTS `t_vote_count` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `vote_id` int DEFAULT NULL,
@@ -8391,10 +8421,11 @@ CREATE TABLE IF NOT EXISTS `t_vote_count` (
   KEY `vote_candidate_id` (`vote_candidate_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table mis-bb.t_vote_count: ~8 rows (approximately)
+-- Dumping data for table mis-bb.t_vote_count: ~0 rows (approximately)
 DELETE FROM `t_vote_count`;
 
 -- Dumping structure for table mis-bb.t_vote_detail
+DROP TABLE IF EXISTS `t_vote_detail`;
 CREATE TABLE IF NOT EXISTS `t_vote_detail` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `location_id` int DEFAULT NULL,
@@ -8408,7 +8439,7 @@ CREATE TABLE IF NOT EXISTS `t_vote_detail` (
   KEY `card_id` (`vote_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table mis-bb.t_vote_detail: ~2,715 rows (approximately)
+-- Dumping data for table mis-bb.t_vote_detail: ~0 rows (approximately)
 DELETE FROM `t_vote_detail`;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
