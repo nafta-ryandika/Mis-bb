@@ -20,8 +20,8 @@ class Hrd_M extends CI_Model
         $status_audit = $data_audit["status"];
 
         if ($status_audit == 1) {
-            $t_exit_permit = "t_audit_exit_permit";
-            $m_employee = "m_audit_employee";
+            $t_exit_permit = "`mis-bb`.t_audit_exit_permit";
+            $m_employee = "hrms.audit_bb_tb_m_kry";
         } else {
             $t_exit_permit = "`mis-bb`.t_exit_permit";
             $m_employee = "hrms.tb_m_kry";
@@ -101,30 +101,31 @@ class Hrd_M extends CI_Model
             if ($objx[0] == "exitPermit") {
                 if ($objx[1] == "detail") {
                     $query = "SELECT 
-                                    *,
-                                    (SELECT department FROM m_department WHERE id = department_id) AS department,
-                                    (SELECT division FROM m_division WHERE id = division_id) AS division,
-                                    (SELECT position FROM m_position WHERE id = position_id) AS position,
-                                    (SELECT necessity FROM m_necessity WHERE id = dt1.necessity_id) AS necessity,
-                                    dt1.id AS transaction_id,  
-                                    dt2.id AS employee_id,
-                                    DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
-                                    DATE_FORMAT(dt1.date_out, '%d-%m-%Y') as date_out,  
-                                    DATE_FORMAT(dt1.created_at, '%d-%m-%Y %H:%i:%s') as created_at,
-                                    DATE_FORMAT(dt1.log_at, '%d-%m-%Y %H:%i:%s') as log_at  
+                                    *, 
+                                    (SELECT Nama_Div FROM hrms.tb_m_div WHERE Stat = 'Aktif' AND UCode_Div = dt2.UCode_Div) AS company,
+                                    (SELECT Nama_Dept FROM hrms.tb_m_dept WHERE Stat = 'Aktif' AND Ucode_Dept = dt2.Ucode_Dept) AS department,
+                                    (SELECT Nama_Sec FROM hrms.tb_m_sec WHERE Stat = 'Aktif' AND Ucode_Sec = dt2.Ucode_Sec) AS division,
+                                    (SELECT Nama_Jbt FROM hrms.tb_m_jbt WHERE Stat = 'Aktif' AND Ucode_Jbt = dt2.Ucode_Jbt) AS `position`,
+                                    dt2.Nama_Kry AS `name`,
+                                (SELECT necessity FROM `mis-bb`.m_necessity WHERE id = dt1.necessity_id) AS necessity,
+                                dt1.id AS transaction_id,  
+                                dt2.Kode_Kry AS employee_id,
+                                DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
+                                DATE_FORMAT(dt1.date_out, '%d-%m-%Y') as date_out,  
+                                DATE_FORMAT(dt1.created_at, '%d-%m-%Y %H:%i:%s') as created_at,
+                                DATE_FORMAT(dt1.log_at, '%d-%m-%Y %H:%i:%s') as log_at    
                                 FROM 
                                 (
                                     SELECT * FROM " . $t_exit_permit . " a WHERE a.id = '" . $param . "'
                                 )dt1
-                                LEFT JOIN 
+                                INNER JOIN 
                                 (
-                                    SELECT *, 
-                                (SELECT department FROM m_department WHERE id = department_id) AS department,
-                                (SELECT division FROM m_division WHERE id = division_id) AS division,
-                                (SELECT position FROM m_position WHERE id = position_id) AS position 
-                                FROM " . $m_employee . " 
+                                SELECT 
+                                    Kode_Kry, Nama_Kry, Ucode_Div, Ucode_Dept, Ucode_Sec, Ucode_Jbt, No_RFID
+                                    FROM " . $m_employee . " b
+                                    WHERE b.Ucode_Div = '11330000000003' 
                                 )dt2
-                                ON dt1.employee_id = dt2.id";
+                                ON dt1.employee_id = dt2.Kode_Kry";
                     $row = $this->db->query($query)->num_rows();
 
                     if ($row > 0) {
@@ -154,30 +155,31 @@ class Hrd_M extends CI_Model
                     }
                 } else if ($objx[1] == "edit") {
                     $query = "SELECT 
-                                    *,
-                                    (SELECT department FROM m_department WHERE id = department_id) AS department,
-                                    (SELECT division FROM m_division WHERE id = division_id) AS division,
-                                    (SELECT position FROM m_position WHERE id = position_id) AS position,
-                                    (SELECT necessity FROM m_necessity WHERE id = dt1.necessity_id) AS necessity,
-                                    dt1.id AS transaction_id,  
-                                    dt2.id AS employee_id,
-                                    DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
-                                    DATE_FORMAT(dt1.date_out, '%d-%m-%Y') as date_out,  
-                                    DATE_FORMAT(dt1.created_at, '%d-%m-%Y %H:%i:%s') as created_at,
-                                    DATE_FORMAT(dt1.log_at, '%d-%m-%Y %H:%i:%s') as log_at  
-                                FROM 
-                                (
-                                    SELECT * FROM " . $t_exit_permit . " a WHERE a.id = '" . $param . "'
-                                )dt1
-                                LEFT JOIN 
-                                (
-                                    SELECT *, 
-                                (SELECT department FROM m_department WHERE id = department_id) AS department,
-                                (SELECT division FROM m_division WHERE id = division_id) AS division,
-                                (SELECT position FROM m_position WHERE id = position_id) AS position 
-                                FROM " . $m_employee . " 
-                                )dt2
-                                ON dt1.employee_id = dt2.id";
+                                *, 
+                                (SELECT Nama_Div FROM hrms.tb_m_div WHERE Stat = 'Aktif' AND UCode_Div = dt2.UCode_Div) AS company,
+                                (SELECT Nama_Dept FROM hrms.tb_m_dept WHERE Stat = 'Aktif' AND Ucode_Dept = dt2.Ucode_Dept) AS department,
+                                (SELECT Nama_Sec FROM hrms.tb_m_sec WHERE Stat = 'Aktif' AND Ucode_Sec = dt2.Ucode_Sec) AS division,
+                                (SELECT Nama_Jbt FROM hrms.tb_m_jbt WHERE Stat = 'Aktif' AND Ucode_Jbt = dt2.Ucode_Jbt) AS `position`,
+                                dt2.Nama_Kry AS `name`,
+                            (SELECT necessity FROM `mis-bb`.m_necessity WHERE id = dt1.necessity_id) AS necessity,
+                            dt1.id AS transaction_id,  
+                            dt2.Kode_Kry AS employee_id,
+                            DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
+                            DATE_FORMAT(dt1.date_out, '%d-%m-%Y') as date_out,  
+                            DATE_FORMAT(dt1.created_at, '%d-%m-%Y %H:%i:%s') as created_at,
+                            DATE_FORMAT(dt1.log_at, '%d-%m-%Y %H:%i:%s') as log_at    
+                            FROM 
+                            (
+                                SELECT * FROM " . $t_exit_permit . " a WHERE a.id = '" . $param . "'
+                            )dt1
+                            INNER JOIN 
+                            (
+                            SELECT 
+                                Kode_Kry, Nama_Kry, Ucode_Div, Ucode_Dept, Ucode_Sec, Ucode_Jbt, No_RFID
+                                FROM " . $m_employee . " b
+                                WHERE b.Ucode_Div = '11330000000003' 
+                            )dt2
+                            ON dt1.employee_id = dt2.Kode_Kry";
                     $row = $this->db->query($query)->num_rows();
 
                     if ($row > 0) {
@@ -210,185 +212,6 @@ class Hrd_M extends CI_Model
         }
 
         return $data;
-
-        // if ($param == "employeeId") {
-        //     $query = "SELECT *, 
-        //             (SELECT department FROM m_department WHERE id = department_id) AS department,
-        //             (SELECT division FROM m_division WHERE id = division_id) AS division,
-        //             (SELECT position FROM m_position WHERE id = position_id) AS position 
-        //             FROM " . $m_employee . "
-        //             WHERE id = '" . $obj . "' OR card = '" . $obj . "'";
-        //     $row = $this->db->query($query)->num_rows();
-
-        //     if ($row == 0) {
-        //         $data['res'] = 0;
-        //         $data['err'] = "Employee Data Not Found !";
-        //     } else if ($row == 1) {
-        //         $res = $this->db->query($query)->row_array();
-        //         $employee_id = $res['id'];
-        //         $data['id'] = $res['id'];
-        //         $data['name'] = $res['name'];
-        //         $data['department'] = $res['department'];
-        //         $data['division'] = $res['division'];
-        //         $data['position'] = $res['position'];
-
-        //         $query2 = "SELECT 
-        //                     *,
-        //                     (SELECT necessity FROM m_necessity WHERE id = necessity_id) AS necessity 
-        //                     FROM " . $t_exit_permit . " 
-        //                     WHERE employee_id = '" . $employee_id . "' AND DATE(created_at) = CURDATE() AND date_in IS NULL AND time_in IS NULL AND status = 0";
-        //         $row2 = $this->db->query($query2)->num_rows();
-
-        //         if ($row2 == 0) {
-        //             $query3 = "SELECT 
-        //                         *,
-        //                         (SELECT necessity FROM m_necessity WHERE id = necessity_id) AS necessity 
-        //                         FROM " . $t_exit_permit . " 
-        //                         WHERE employee_id = '" . $employee_id . "' AND DATE(created_at) = (CURDATE() - INTERVAL 1 DAY) AND date_out IS NULL AND time_out IS NULL AND status = 0";
-        //             $row3 = $this->db->query($query3)->num_rows();
-        //             $res3 = $this->db->query($query3)->row_array();
-
-
-
-        //             if ($row3 > 0) {
-        //                 $data['transaction_id'] = $res3['id'];
-        //                 $data['date_out'] = date("d-m-Y", strtotime($res3['date_out']));
-        //                 $data['time_out'] = $res3['time_out'];
-        //                 $data['necessity_id'] = $res3['necessity_id'];
-        //                 $data['necessity'] = $res3['necessity'];
-        //                 $data['remark'] = $res3['remark'];
-        //                 $data['res'] = 2;
-        //             } else {
-        //                 $data['res'] = 1;
-        //             }
-        //         } else if ($row2 == 1) {
-        //             $res2 = $this->db->query($query2)->row_array();
-        //             $data['transaction_id'] = $res2['id'];
-        //             $data['date_out'] = date("d-m-Y", strtotime($res2['date_out']));
-        //             $data['time_out'] = $res2['time_out'];
-        //             $data['necessity_id'] = $res2['necessity_id'];
-        //             $data['necessity'] = $res2['necessity'];
-        //             $data['remark'] = $res2['remark'];
-        //             $data['res'] = 2;
-        //         }
-        //     } else if ($row > 1) {
-        //         $data['res'] = 0;
-        //         $data['err'] = "Employee Data Duplicate !";
-        //     }
-        // } else {
-        //     $objx = explode("|", $obj);
-        //     if ($objx[0] == "exitPermit") {
-        //         if ($objx[1] == "detail") {
-        //             $query = "SELECT 
-        //                             *,
-        //                             (SELECT department FROM m_department WHERE id = department_id) AS department,
-        //                             (SELECT division FROM m_division WHERE id = division_id) AS division,
-        //                             (SELECT position FROM m_position WHERE id = position_id) AS position,
-        //                             (SELECT necessity FROM m_necessity WHERE id = dt1.necessity_id) AS necessity,
-        //                             dt1.id AS transaction_id,  
-        //                             dt2.id AS employee_id,
-        //                             DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
-        //                             DATE_FORMAT(dt1.date_out, '%d-%m-%Y') as date_out,  
-        //                             DATE_FORMAT(dt1.created_at, '%d-%m-%Y %H:%i:%s') as created_at,
-        //                             DATE_FORMAT(dt1.log_at, '%d-%m-%Y %H:%i:%s') as log_at  
-        //                         FROM 
-        //                         (
-        //                             SELECT * FROM " . $t_exit_permit . " a WHERE a.id = '" . $param . "'
-        //                         )dt1
-        //                         LEFT JOIN 
-        //                         (
-        //                             SELECT *, 
-        //                         (SELECT department FROM m_department WHERE id = department_id) AS department,
-        //                         (SELECT division FROM m_division WHERE id = division_id) AS division,
-        //                         (SELECT position FROM m_position WHERE id = position_id) AS position 
-        //                         FROM " . $m_employee . " 
-        //                         )dt2
-        //                         ON dt1.employee_id = dt2.id";
-        //             $row = $this->db->query($query)->num_rows();
-
-        //             if ($row > 0) {
-        //                 $res = $this->db->query($query)->row_array();
-
-        //                 $data['employee_id'] = $res['employee_id'];
-        //                 $data['name'] = $res['name'];
-        //                 $data['department'] = $res['department'];
-        //                 $data['division'] = $res['division'];
-        //                 $data['position'] = $res['position'];
-        //                 $data['transaction_id'] = $res['transaction_id'];
-        //                 $data['date_in'] = $res['date_in'];
-        //                 $data['time_in'] = $res['time_in'];
-        //                 $data['date_out'] = $res['date_out'];
-        //                 $data['time_out'] = $res['time_out'];
-        //                 $data['necessity_id'] = $res['necessity_id'];
-        //                 $data['necessity'] = $res['necessity'];
-        //                 $data['remark'] = $res['remark'];
-        //                 $data['created_by'] = $res['created_by'];
-        //                 $data['created_at'] = $res['created_at'];
-        //                 $data['log_by'] = $res['log_by'];
-        //                 $data['log_at'] = $res['log_at'];
-        //                 $data['res'] = 3;
-        //             } else {
-        //                 $data['res'] = 0;
-        //                 $data['err'] = "Data Transaction Doesn't Exist !";
-        //             }
-        //         } else if ($objx[1] == "edit") {
-        //             $query = "SELECT 
-        //                             *,
-        //                             (SELECT department FROM m_department WHERE id = department_id) AS department,
-        //                             (SELECT division FROM m_division WHERE id = division_id) AS division,
-        //                             (SELECT position FROM m_position WHERE id = position_id) AS position,
-        //                             (SELECT necessity FROM m_necessity WHERE id = dt1.necessity_id) AS necessity,
-        //                             dt1.id AS transaction_id,  
-        //                             dt2.id AS employee_id,
-        //                             DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
-        //                             DATE_FORMAT(dt1.date_out, '%d-%m-%Y') as date_out,  
-        //                             DATE_FORMAT(dt1.created_at, '%d-%m-%Y %H:%i:%s') as created_at,
-        //                             DATE_FORMAT(dt1.log_at, '%d-%m-%Y %H:%i:%s') as log_at  
-        //                         FROM 
-        //                         (
-        //                             SELECT * FROM " . $t_exit_permit . " a WHERE a.id = '" . $param . "'
-        //                         )dt1
-        //                         LEFT JOIN 
-        //                         (
-        //                             SELECT *, 
-        //                         (SELECT department FROM m_department WHERE id = department_id) AS department,
-        //                         (SELECT division FROM m_division WHERE id = division_id) AS division,
-        //                         (SELECT position FROM m_position WHERE id = position_id) AS position 
-        //                         FROM " . $m_employee . " 
-        //                         )dt2
-        //                         ON dt1.employee_id = dt2.id";
-        //             $row = $this->db->query($query)->num_rows();
-
-        //             if ($row > 0) {
-        //                 $res = $this->db->query($query)->row_array();
-
-        //                 $data['employee_id'] = $res['employee_id'];
-        //                 $data['name'] = $res['name'];
-        //                 $data['department'] = $res['department'];
-        //                 $data['division'] = $res['division'];
-        //                 $data['position'] = $res['position'];
-        //                 $data['transaction_id'] = $res['transaction_id'];
-        //                 $data['date_in'] = $res['date_in'];
-        //                 $data['time_in'] = $res['time_in'];
-        //                 $data['date_out'] = $res['date_out'];
-        //                 $data['time_out'] = $res['time_out'];
-        //                 $data['necessity_id'] = $res['necessity_id'];
-        //                 $data['necessity'] = $res['necessity'];
-        //                 $data['remark'] = $res['remark'];
-        //                 $data['created_by'] = $res['created_by'];
-        //                 $data['created_at'] = $res['created_at'];
-        //                 $data['log_by'] = $res['log_by'];
-        //                 $data['log_at'] = $res['log_at'];
-        //                 $data['res'] = 4;
-        //             } else {
-        //                 $data['res'] = 0;
-        //                 $data['err'] = "Data Transaction Doesn't Exist !";
-        //             }
-        //         }
-        //     }
-        // }
-
-        // return $data;
     }
 
     public function get($param, $obj)
@@ -416,8 +239,8 @@ class Hrd_M extends CI_Model
         $status_audit = $data_audit["status"];
 
         if ($status_audit == 1) {
-            $t_exit_permit = "t_audit_exit_permit";
-            $m_employee = "m_audit_employee";
+            $t_exit_permit = "`mis-bb`.t_audit_exit_permit";
+            $m_employee = "hrms.audit_bb_tb_m_kry";
         } else {
             $t_exit_permit = "`mis-bb`.t_exit_permit";
             $m_employee = "hrms.tb_m_kry";
@@ -529,11 +352,11 @@ class Hrd_M extends CI_Model
         $status_audit = $data_audit["status"];
 
         if ($status_audit == 1) {
-            $t_exit_permit = "t_audit_exit_permit";
-            $m_employee = "m_audit_employee";
+            $t_exit_permit = "`mis-bb`.t_audit_exit_permit";
+            $m_employee = "hrms.audit_bb_tb_m_kry";
         } else {
-            $t_exit_permit = "t_exit_permit";
-            $m_employee = "m_employee";
+            $t_exit_permit = "`mis-bb`.t_exit_permit";
+            $m_employee = "hrms.tb_m_kry";
         }
 
         $data = array();

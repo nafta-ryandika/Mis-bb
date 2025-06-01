@@ -31,52 +31,13 @@ class Hrd extends CI_Controller
 
         if ($status_audit == 1) {
             $t_exit_permit = "`mis-bb`.t_audit_exit_permit";
-            $m_employee = "m_audit_employee";
-            $sql_exit_permit = "SELECT * , 
-                            dt1.id AS transaction_id,
-                            (SELECT necessity FROM m_necessity WHERE id = dt1.necessity_id) AS necessity,
-                            DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
-                            DATE_FORMAT(dt1.date_out, '%d-%m-%Y') as date_out,
-                            IF(dt1.status = 0, 'Pending', IF(dt1.status = 1, 'Complete', IF(dt1.status = 2, 'Uncomplete','Unknown'))) AS status_name
-                            FROM 
-                            (
-                                SELECT id, employee_id, date_in, time_in, date_out, time_out, necessity_id, remark, status,created_at, log_at 
-                                FROM " . $t_exit_permit . " a 
-                                WHERE 1
-                            )dt1
-                            LEFT JOIN
-                            (
-                                SELECT id, card, name, company_id, department_id, division_id, position_id 
-                                FROM " . $m_employee . " b 
-                                WHERE 1
-                            )dt2
-                            ON dt1.employee_id = dt2.id
-                            LEFT JOIN 
-                            (
-                                SELECT id, company FROM m_company c WHERE 1 
-                            )dt3
-                            ON dt2.company_id = dt3.id 
-                            LEFT JOIN 
-                            (
-                                SELECT id, department FROM  m_department d WHERE 1
-                            )dt4
-                            ON dt2.department_id = dt4.id 
-                            LEFT JOIN 
-                            (
-                                SELECT id, division FROM m_division e WHERE 1 
-                            )dt5
-                            ON dt2.division_id = dt5.id
-                            LEFT JOIN 
-                            (
-                                SELECT id, `position` FROM m_position f WHERE 1
-                            )dt6
-                            ON dt2.position_id = dt6.id 
-                            ORDER BY created_at DESC, log_at DESC";
+            $m_employee = "hrms.audit_bb_tb_m_kry";
         } else {
             $t_exit_permit = "`mis-bb`.t_exit_permit";
             $m_employee = "hrms.tb_m_kry";
+        }
 
-            $sql_exit_permit = "SELECT * , 
+        $sql_exit_permit = "SELECT * , 
                             dt1.id AS transaction_id,
                             (SELECT necessity FROM `mis-bb`.m_necessity WHERE id = dt1.necessity_id) AS necessity,
                             DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
@@ -102,7 +63,6 @@ class Hrd extends CI_Controller
                             )dt2
                             ON dt1.employee_id = dt2.Kode_Kry
                             ORDER BY created_at DESC, log_at DESC ";
-        }
 
         $data['exit_permit'] = $this->db->query($sql_exit_permit)->result_array();
 
