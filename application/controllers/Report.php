@@ -51,10 +51,10 @@ class Report extends CI_Controller
                                 DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
                                 DATE_FORMAT(dt1.date_out, '%d-%m-%Y') as date_out,
                                 IF(dt1.status = 0, 'Pending', IF(dt1.status = 1, 'Complete', IF(dt1.status = 2, 'Uncomplete','Unknown'))) AS status_name,
-                                (dt3.Nama_Div) AS company,
+                                (SELECT Nama_Div FROM hrms.tb_m_div WHERE Stat = 'Aktif' AND UCode_Div = dt2.UCode_Div) AS company,
                                 (dt4.Nama_Dept) AS department,
                                 (dt5.Nama_Sec) AS division,
-                                (dt6.Nama_Jbt) AS `position`,
+                                (SELECT Nama_Jbt FROM hrms.tb_m_jbt WHERE Stat = 'Aktif' AND Ucode_Jbt = dt2.Ucode_Jbt) AS `position`,
                                 dt2.Nama_Kry AS `name`
                             FROM 
                             (
@@ -74,14 +74,6 @@ class Report extends CI_Controller
                             INNER JOIN 
                             (
                                 SELECT 
-                                    UCode_Div, Nama_Div
-                                FROM hrms.tb_m_div 
-                                WHERE Stat = 'Aktif'	
-                            )dt3 
-                            ON dt2.UCode_Div = dt3.UCode_Div 
-                            INNER JOIN 
-                            (
-                                SELECT 
                                     UCode_Dept, Nama_Dept
                                 FROM hrms.tb_m_dept 
                                 WHERE Stat = 'Aktif'	
@@ -95,14 +87,6 @@ class Report extends CI_Controller
                                 WHERE Stat = 'Aktif'	
                             )dt5
                             ON dt2.UCode_Sec = dt5.UCode_Sec
-                            INNER JOIN 
-                            (
-                                SELECT 
-                                    UCode_Jbt, Nama_Jbt 
-                                FROM hrms.tb_m_jbt 
-                                WHERE Stat = 'Aktif'	
-                            )dt6
-                            ON dt2.UCode_Jbt = dt6.UCode_Jbt 
                             WHERE 1 " . $inWhere . "
                             ORDER BY created_at DESC, log_at DESC";
 

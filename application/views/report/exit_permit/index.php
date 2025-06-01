@@ -25,9 +25,9 @@
                                                 <select class="form-control inSearchcolumn" style="width: 100%;" onchange="get('searchColumn',this,'')">
                                                     <option value="">Parameter</option>
                                                     <option value="dt1.employee_id">Employee ID</option>
-                                                    <option value="dt2.name">Name</option>
-                                                    <option value="dt4.department">Department</option>
-                                                    <option value="dt5.division">Division</option>
+                                                    <option value="dt2.Nama_Kry">Name</option>
+                                                    <option value="dt4.Nama_Dept">Department</option>
+                                                    <option value="dt5.Nama_Sec">Division</option>
                                                     <option value="dt1.date_out">Date OUT</option>
                                                     <option value="TIME_FORMAT(dt1.time_out, '%H:%i')">Time OUT</option>
                                                     <option value="dt1.date_in">Date IN</option>

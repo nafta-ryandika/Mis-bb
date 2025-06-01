@@ -225,9 +225,9 @@ function add(param,obj){
 											<select class="form-control inSearchcolumn" style="width: 100%;" onchange="get(\'searchColumn\',this,\'\')">\n\
 												<option value="">Parameter</option>\n\
 												<option value="dt1.employee_id">Employee ID</option>\n\
-												<option value="dt2.name">Name</option>\n\
-												<option value="dt4.department">Department</option>\n\
-												<option value="dt5.division">Division</option>\n\
+												<option value="dt2.Nama_Kry">Name</option>\n\
+												<option value="dt4.Nama_Dept">Department</option>\n\
+												<option value="dt5.Nama_Sec">Division</option>\n\
 												<option value="dt1.date_out">Date OUT</option>\n\
 												<option value="TIME_FORMAT(dt1.time_out, \'%H:%i\')">Time OUT</option>\n\
 												<option value="dt1.date_in">Date IN</option>\n\
