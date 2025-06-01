@@ -101,7 +101,7 @@ class Hrd_M extends CI_Model
             if ($objx[0] == "exitPermit") {
                 if ($objx[1] == "detail") {
                     $query = "SELECT 
-                                    *, 
+                                    dt1.*, 
                                     (SELECT Nama_Div FROM hrms.tb_m_div WHERE Stat = 'Aktif' AND UCode_Div = dt2.UCode_Div) AS company,
                                     (SELECT Nama_Dept FROM hrms.tb_m_dept WHERE Stat = 'Aktif' AND Ucode_Dept = dt2.Ucode_Dept) AS department,
                                     (SELECT Nama_Sec FROM hrms.tb_m_sec WHERE Stat = 'Aktif' AND Ucode_Sec = dt2.Ucode_Sec) AS division,
@@ -155,7 +155,7 @@ class Hrd_M extends CI_Model
                     }
                 } else if ($objx[1] == "edit") {
                     $query = "SELECT 
-                                *, 
+                                dt1.*, 
                                 (SELECT Nama_Div FROM hrms.tb_m_div WHERE Stat = 'Aktif' AND UCode_Div = dt2.UCode_Div) AS company,
                                 (SELECT Nama_Dept FROM hrms.tb_m_dept WHERE Stat = 'Aktif' AND Ucode_Dept = dt2.Ucode_Dept) AS department,
                                 (SELECT Nama_Sec FROM hrms.tb_m_sec WHERE Stat = 'Aktif' AND Ucode_Sec = dt2.Ucode_Sec) AS division,

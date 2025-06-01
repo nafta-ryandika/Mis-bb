@@ -37,7 +37,8 @@ class Hrd extends CI_Controller
             $m_employee = "hrms.tb_m_kry";
         }
 
-        $sql_exit_permit = "SELECT * , 
+        $sql_exit_permit = "SELECT 
+                            dt1.* , 
                             dt1.id AS transaction_id,
                             (SELECT necessity FROM `mis-bb`.m_necessity WHERE id = dt1.necessity_id) AS necessity,
                             DATE_FORMAT(dt1.date_in, '%d-%m-%Y') as date_in,
@@ -46,7 +47,7 @@ class Hrd extends CI_Controller
                             (SELECT Nama_Div FROM hrms.tb_m_div WHERE Stat = 'Aktif' AND UCode_Div = dt2.UCode_Div) AS company,
                             (SELECT Nama_Dept FROM hrms.tb_m_dept WHERE Stat = 'Aktif' AND Ucode_Dept = dt2.Ucode_Dept) AS department,
                             (SELECT Nama_Sec FROM hrms.tb_m_sec WHERE Stat = 'Aktif' AND Ucode_Sec = dt2.Ucode_Sec) AS division,
-                            (SELECT Nama_Jbt FROM hrms.tb_m_jbt WHERE Stat = 'Aktif' AND Ucode_Jbt = dt2.Ucode_Jbt) AS position,
+                            (SELECT Nama_Jbt FROM hrms.tb_m_jbt WHERE Stat = 'Aktif' AND Ucode_Jbt = dt2.Ucode_Jbt) AS `position`,
                             dt2.Nama_Kry AS name
                             FROM 
                             (
@@ -62,7 +63,7 @@ class Hrd extends CI_Controller
                                 WHERE UCode_Div = '11330000000003'
                             )dt2
                             ON dt1.employee_id = dt2.Kode_Kry
-                            ORDER BY created_at DESC, log_at DESC ";
+                            ORDER BY created_at DESC, log_at DESC";
 
         $data['exit_permit'] = $this->db->query($sql_exit_permit)->result_array();
 
