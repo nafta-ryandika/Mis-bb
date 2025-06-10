@@ -21,7 +21,7 @@
                                         <div class="form-group row">
                                             <div class="col-3">
                                                 <select class="form-control" id="informAction" style="width: 100%;">
-                                                    <option value="">Action</option>
+                                                    <option value="" disabled selected hidden>Action</option>
                                                     <?php
                                                     foreach ($form_action as $data_vote_form_action) :
                                                         echo "<option value='" . $data_vote_form_action["id"] . "'>" . $data_vote_form_action["action"] . "</option>";
@@ -31,7 +31,12 @@
                                             </div>
                                             <div class="col-3">
                                                 <select class="form-control" id="inFromtransaction" style="width: 100%;">
-                                                    <option value="">Transaction</option>
+                                                    <option value="" disabled selected hidden>Transaction</option>
+                                                    <?php
+                                                    foreach ($form_transaction as $data_form_transaction) :
+                                                        echo "<option value='" . $data_form_transaction["id"] . "'>" . $data_form_transaction["transaction"] . "</option>";
+                                                    endforeach;
+                                                    ?>
                                                 </select>
                                             </div>
                                             <div class="col-3">
@@ -49,12 +54,15 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <div class="row col-12" id="inputArea">
+                                    aaaaa
+                                </div>
+                            </td>
+                        </tr>
                     </table>
                 </div>
-            </div>
-
-            <div class="content col-lg-4 offset-lg-4" id="inputArea">
-                <input type="text" name="inId" class="form-control" id="inId" placeholder="ID / ID Card" style="text-align: center;" autofocus>
             </div>
 
             <?= form_error('inMenu', '<div class="alert alert-danger role="alert">', '</div>'); ?>

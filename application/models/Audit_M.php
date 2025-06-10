@@ -218,8 +218,8 @@ class Audit_M extends CI_Model
     {
         $data = array();
 
-        if ($param == "inNecessity") {
-            $query = "SELECT id, necessity FROM m_necessity";
+        if ($param == "inFromtransaction") {
+            $query = "SELECT id, `transaction` FROM m_form_transaction";
             $row = $this->db->query($query)->num_rows();
 
             if ($row > 0) {

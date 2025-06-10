@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	// get("inFromtransaction","","");
 });
 
 $(function () {
@@ -135,10 +135,10 @@ function viewData() {
 }
 
 function get(param,obj,callBack) {
-	if (param == "inLocation") {
+	if (param == "inFromtransaction") {
 		$.ajax({
 			type: "POST",
-			url: base_url+"vote/get",
+			url: base_url+"audit/get",
 			data: {
 				param: param,
 				obj: obj
@@ -146,7 +146,7 @@ function get(param,obj,callBack) {
 			cache: false,
 			dataType: "JSON",
 			beforeSend: function(data) {
-				$('#inLocation').select2({
+				$('#inFromtransaction').select2({
 					theme: 'bootstrap4'
 				})
 			},
@@ -156,14 +156,14 @@ function get(param,obj,callBack) {
 	
 					for (i=0; i<data.res.length; i++) {
 						if (callBack.trim() != "" && callBack == data.res[i].id) {
-							html += '<option value="' + data.res[i].id + '" selected>' + data.res[i].name + '</option>';	
+							html += '<option value="' + data.res[i].id + '" selected>' + data.res[i].transaction + '</option>';	
 						}
 						else {
-							html += '<option value="' + data.res[i].id + '">' + data.res[i].name + '</option>';
+							html += '<option value="' + data.res[i].id + '">' + data.res[i].ntransaction + '</option>';
 						}
 					}
 	
-					$('#inLocation').html(html);
+					$('#inFromtransaction').html(html);
 			}
 		});
 	}
