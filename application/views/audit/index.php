@@ -17,37 +17,20 @@
                         <tr>
                             <td>
                                 <div class="row col-12">
-                                    <div class="col-8 m-2">
+                                    <div class="col-12 m-2">
                                         <div class="form-group row">
-                                            <div class="col-3">
-                                                <select class="form-control" id="informAction" style="width: 100%;">
+                                            <div class="col-4">
+                                                <select class="form-control" id="inAuditaction" style="width: 100%;">
                                                     <option value="" disabled selected hidden>Action</option>
                                                     <?php
-                                                    foreach ($form_action as $data_vote_form_action) :
-                                                        echo "<option value='" . $data_vote_form_action["id"] . "'>" . $data_vote_form_action["action"] . "</option>";
+                                                    foreach ($audit_action as $data_audit_action) :
+                                                        echo "<option value='" . $data_audit_action["id"] . "'>" . $data_audit_action["action"] . "</option>";
                                                     endforeach;
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="col-3">
-                                                <select class="form-control" id="inFromtransaction" style="width: 100%;">
-                                                    <option value="" disabled selected hidden>Transaction</option>
-                                                    <?php
-                                                    foreach ($form_transaction as $data_form_transaction) :
-                                                        echo "<option value='" . $data_form_transaction["id"] . "'>" . $data_form_transaction["transaction"] . "</option>";
-                                                    endforeach;
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div class="col-3">
+                                            <div class="col-2">
                                                 <a class="btn btn-success col-6" id="btnSet" title="Set" onclick="set()">Set</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 m-2">
-                                        <div class="form-group float-right row">
-                                            <div class=" float-right">
-                                                <a class="btn btn-info col-12" id="btnRefresh" title="Refresh" onclick="viewData()"><i class="fas fa-fw fa-solid fa-arrows-rotate m-1"></i>Refresh</a>
                                             </div>
                                         </div>
                                     </div>
@@ -56,8 +39,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="row col-12" id="inputArea">
-                                    aaaaa
+                                <div class="row col-12">
+                                    <div class="col-12">
+                                        <div class="form-group row m-2" id="inputArea">
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>

@@ -3,46 +3,43 @@ $(document).ready(function() {
 });
 
 $(function () {
-    $('#informAction,#inFromtransaction').select2({
+    $('#inAuditaction').select2({
 		theme: 'bootstrap4'
 	})
 })
 
-function lock(){
-	var inVote = $("#inVote").val().trim();
-	var inLocation = $("#inLocation").val().trim();
+function set(){
+	var inAuditaction = $("#inAuditaction").val().trim();
 
-	if (inVote == "") {
+	if (inAuditaction == "") {
 		Swal.fire({
-			title: "Input Vote Empty !",
+			title: "Input Action Empty !",
 			icon: "error",
 			timer: 1000
 		}).then(function () { 
-			$("#inVote").focus();
-		});
-	} else if (inLocation == "") {
-		Swal.fire({
-			title: "Input Location Empty !",
-			icon: "error",
-			timer: 1000
-		}).then(function () { 
-			$("#inLocation").focus();
+			$("#inAuditaction").focus();
 		});
 	} else {
-		if ($("#btnLock").text() == "Lock") {
-			$("#inVote").prop("disabled",true);
-			$("#inLocation").prop("disabled",true);
-			$("#btnLock").removeClass('btn-success').addClass('btn-danger');
-			$("#btnLock").html("<i class='fas fa-fw fa-solid fa-lock m-1'></i>Unlock");
-			$("#inId").focus();	
-		} else {
-			$("#inVote").prop("disabled",false);
-			$("#inLocation").prop("disabled",false);
-			$("#btnLock").removeClass('btn-danger').addClass('btn-success');
-			$("#btnLock").html("<i class='fas fa-fw fa-solid fa-lock-open m-1'></i>Lock");
+		var html = "";
+		if (inAuditaction == 1) {
+			html = "<form id='uploadForm' enctype='multipart/form-data' class='form-inline text-center margin-top'>\n\
+						<div class='custom-file'>\n\
+    <input type='file' class='custom-file-input'  id='inputGroupFile01' >\n\
+    <label class='custom-file-label' for='inputGroupFile01'>Choose file</label>\n\
+  </div>\n\
+						<button type='submit' class='btn btn-primary m-2'>Preview</button>\n\
+					</form>";
+
+				// 	<div class='form-group row'>\n\
+				// 	<div class='col-4'>\n\
+				// 	<input type='file' class='form-control' name='file' id='file' accept='.xls,.xlsx' required>\n\
+				// 	</div>\n\
+				// </div>\n\
+
+			
 		}
 
-		get("candidate",inVote,"");
+		$('#inputArea').html(html);
 	}
 }
 

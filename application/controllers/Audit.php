@@ -14,13 +14,12 @@ class Audit extends CI_Controller
     {
         $data['title'] = 'Audit';
         $data['user'] = $this->db->get_where('m_user', ['user_id' => $this->session->userdata('user_id')])->row_array();
-        $data['form_action'] = $this->db->get('m_form_action')->result_array();
-        $data['form_transaction'] = $this->db->get('m_form_transaction')->result_array();
+        $data['audit_action'] = $this->db->get('m_audit_action')->result_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('audit_upload_data/index', $data);
+        $this->load->view('audit/index', $data);
         $this->load->view('templates/footer');
         $this->load->view('templates/script', $data);
     }
