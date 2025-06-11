@@ -9,7 +9,7 @@
             <div class="card shadow mt-4 mb-4">
                 <!-- Card Header - Accordion -->
                 <a href="#collapse" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                    <h6 class="m-0 font-weight-bold text-primary">Setting</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Parameter</h6>
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapse" style="">
@@ -37,17 +37,28 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="row col-12">
-                                    <div class="col-12">
-                                        <div class="form-group row m-2" id="inputArea">
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
                     </table>
+                </div>
+            </div>
+
+            <div class="card shadow mt-4 mb-4">
+                <div class="row col-12 mt-4">
+                    <div class="col-6" style="display:show;">
+                        <div class="form-group row m-2">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inFile01">
+                                    <label class="custom-file-label" for="inFile01">Choose file</label>
+                                </div>
+                                <div class="col-4">
+                                    <a class="btn btn-success col-6" id="btnSet" title="Set" onclick="">Template</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
