@@ -1,5 +1,10 @@
+var upload_data = [];
+
 $(document).ready(function() {
-	// get("inFromtransaction","","");
+	 $('#uploadForm').on('submit', function (e) {
+		e.preventDefault();
+		console.log("test");
+	 })
 });
 
 $(function () {
@@ -7,6 +12,7 @@ $(function () {
 		theme: 'bootstrap4'
 	})
 })
+
 
 function set(){
 	var inAuditaction = $("#inAuditaction").val().trim();
@@ -22,29 +28,29 @@ function set(){
 	} else {
 		var html = "";
 		if (inAuditaction == 1) {
-			html = "<form id='uploadForm' enctype='multipart/form-data' class='form-inline text-center margin-top'>\n\
-						<div class='input-group mb-3'>\n\
-  <div class='input-group-prepend'>\n\
-    <span class='input-group-text' id='inputGroupFileAddon01'>Upload</span>\n\
-  </div>\n\
-  <div class='custom-file'>\n\
-    <input type='file' class='custom-file-input' id='inputGroupFile01' aria-describedby='inputGroupFileAddon01'>\n\
-    <label class='custom-file-label' for='inputGroupFile01'>Choose file</label>\n\
-  </div>\n\
-</div>\n\
-						<button type='submit' class='btn btn-primary m-2'>Preview</button>\n\
-					</form>";
+// 			html = "<form id='uploadForm' enctype='multipart/form-data' class='form-inline text-center margin-top'>\n\
+// 						<div class='input-group mb-3'>\n\
+//   <div class='input-group-prepend'>\n\
+//     <span class='input-group-text' id='inputGroupFileAddon01'>Upload</span>\n\
+//   </div>\n\
+//   <div class='custom-file'>\n\
+//     <input type='file' class='custom-file-input' id='inputGroupFile01' aria-describedby='inputGroupFileAddon01'>\n\
+//     <label class='custom-file-label' for='inputGroupFile01'>Choose file</label>\n\
+//   </div>\n\
+// </div>\n\
+// 						<button type='submit' class='btn btn-primary m-2'>Preview</button>\n\
+// 					</form>";
 
-				// 	<div class='form-group row'>\n\
-				// 	<div class='col-4'>\n\
-				// 	<input type='file' class='form-control' name='file' id='file' accept='.xls,.xlsx' required>\n\
-				// 	</div>\n\
-				// </div>\n\
+// 				// 	<div class='form-group row'>\n\
+// 				// 	<div class='col-4'>\n\
+// 				// 	<input type='file' class='form-control' name='file' id='file' accept='.xls,.xlsx' required>\n\
+// 				// 	</div>\n\
+// 				// </div>\n\
 
 			
 		}
 
-		$('#inputArea').html(html);
+		// $('#inputArea').html(html);
 	}
 }
 

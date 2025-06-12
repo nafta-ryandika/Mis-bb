@@ -41,26 +41,40 @@
                 </div>
             </div>
 
-            <div class="card shadow mt-4 mb-4">
-                <div class="row col-12 mt-4">
-                    <div class="col-6" style="display:show;">
-                        <div class="form-group row m-2">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Upload</span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inFile01">
-                                    <label class="custom-file-label" for="inFile01">Choose file</label>
-                                </div>
-                                <div class="col-4">
-                                    <a class="btn btn-success col-6" id="btnSet" title="Set" onclick="">Template</a>
-                                </div>
+            <!-- <div class="card shadow mt-4 mb-4">
+                <div class="row col-12 m-2" id="form1" style="display:show;">
+                    <div class="col-12 form-group m-2">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <input type="file" class="custom-file-input" id="inFile1">
+                                <label class="custom-file-label" for="inFile1">Choose file</label>
+                                <a class="btn btn-success col-6 ml-2" type="submit" id="btnUpload" title="Upload" onclick="upload()">Upload</a>
+                                <a class="btn btn-success col-6" id="btnTemplate" title="Template" onclick="">Template</a>
                             </div>
-                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="card shadow mt-4 mb-4">
+                <div class="row col-12 mt-2 mb-2" id="form1">
+                    <div class="col-12 form-group m-2">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="d-flex flex-wrap align-items-center">
+                                <div class="col-4 custom-file mr-2" style="flex: 1 1 auto; min-width: 250px;">
+                                    <input type="file" class="custom-file-input" id="inFile1" name="file" required>
+                                    <label class="custom-file-label" for="inFile1">Choose file</label>
+                                </div>
+
+                                <button type="button" class="btn btn-success ml-2" id="btnUpload" title="Upload" onclick="upload()">Upload</button>
+
+                                <button type="button" class="btn btn-secondary ml-2" id="btnTemplate" title="Template">Template</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
 
             <?= form_error('inMenu', '<div class="alert alert-danger role="alert">', '</div>'); ?>
             <?= $this->session->flashdata('message'); ?>
