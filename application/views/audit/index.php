@@ -41,34 +41,20 @@
                 </div>
             </div>
 
-            <!-- <div class="card shadow mt-4 mb-4">
-                <div class="row col-12 m-2" id="form1" style="display:show;">
-                    <div class="col-12 form-group m-2">
-                        <form id="uploadForm" enctype="multipart/form-data">
-                            <div class="input-group">
-                                <input type="file" class="custom-file-input" id="inFile1">
-                                <label class="custom-file-label" for="inFile1">Choose file</label>
-                                <a class="btn btn-success col-6 ml-2" type="submit" id="btnUpload" title="Upload" onclick="upload()">Upload</a>
-                                <a class="btn btn-success col-6" id="btnTemplate" title="Template" onclick="">Template</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="card shadow mt-4 mb-4">
                 <div class="row col-12 mt-2 mb-2" id="form1">
                     <div class="col-12 form-group m-2">
                         <form id="uploadForm" enctype="multipart/form-data">
                             <div class="d-flex flex-wrap align-items-center">
                                 <div class="col-4 custom-file mr-2" style="flex: 1 1 auto; min-width: 250px;">
-                                    <input type="file" class="custom-file-input" id="inFile1" name="file" required>
+                                    <input type="file" class="custom-file-input" id="inFile1" name="file" accept=".xls,.xlsx" required>
                                     <label class="custom-file-label" for="inFile1">Choose file</label>
                                 </div>
 
-                                <button type="button" class="btn btn-success ml-2" id="btnUpload" title="Upload" onclick="upload()">Upload</button>
+                                <button type="submit" class="col-1 btn btn-success ml-2" id="btnPreview" title="Preview">Preview</button>
+                                <button type="submit" class="col-1 btn btn-success ml-2" id="btnUpload" title="Upload" onclick="upload()">Upload</button>
 
-                                <button type="button" class="btn btn-secondary ml-2" id="btnTemplate" title="Template">Template</button>
+                                <button type="button" class="col-1 btn btn-secondary ml-2" id="btnTemplate" title="Template">Template</button>
                             </div>
                         </form>
                     </div>

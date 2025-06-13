@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 class Audit extends CI_Controller
 {
     public function __construct()
@@ -69,6 +73,51 @@ class Audit extends CI_Controller
         $data['exit_permit'] = $this->db->query($sql_exit_permit)->result_array();
 
         $this->load->view('exit_permit/view_data', $data);
+    }
+
+    public function previewData()
+    {
+        header('Content-Type: application/json');
+
+        if (empty($_FILES['file']['name'])) {
+            echo json_encode(['status' => 'error', 'message' => 'File Empty !']);
+            return;
+        }
+
+        $file_format = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+        if (!in_array($_FILES['file']['type'], $file_format)) {
+            echo json_encode(['status' => 'error', 'message' => 'Format file not valid !']);
+            return;
+        }
+
+        try {
+            $spreadsheet = IOFactory::load($_FILES['file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+
+            if (count($sheetData) <= 1) {
+                echo json_encode(['status' => 'error', 'message' => 'File Empty !']);
+                return;
+            }
+
+            $previewData = [];
+            $invalidRows = [];
+
+            foreach ($sheetData as $index => $row) {
+                if ($index == 0) continue; // skip header
+
+                $previewData[] = [
+                    'id'    => trim($row[0])
+                ];
+            }
+
+            echo json_encode([
+                'status' => 'success',
+                'data'   => $previewData,
+                'invalid' => $invalidRows
+            ]);
+        } catch (Exception $e) {
+            echo json_encode(['status' => 'error', 'message' => 'Cant Read File : ' . $e->getMessage()]);
+        }
     }
 
     public function check()
