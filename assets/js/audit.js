@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('#uploadForm').on('submit', function (e) {
 		e.preventDefault();
 
-		var fileInput = $('#inFile1')[0].files[0];
+		var inFile = $('#inFile1')[0].files[0];
     	var inAuditaction = $('#inAuditaction').val();
 
 		if (!inAuditaction) {
@@ -14,7 +14,7 @@ $(document).ready(function() {
 				timer: 1000
 			})
 			return;
-		} else if (!fileInput) {
+		} else if (!inFile) {
 			Swal.fire({
 				title: "Input File Empty !",
 				icon: "error",
@@ -24,6 +24,8 @@ $(document).ready(function() {
 		}
 
 		const formData = new FormData(this);
+		formData.append('file', inFile);
+		formData.append('inAuditaction', inAuditaction);
 
 		$.ajax({
             url: base_url+'audit/previewData',
@@ -31,32 +33,39 @@ $(document).ready(function() {
             data: formData,
             contentType: false,
             processData: false,
-            dataType: 'json',
-            success: function (res) {
-                if (res.status === 'success') {
-                    previewData = res.data;
-					console.log("hahaha"+res.data);
-                    // let html = '<h3>Preview Data:</h3>';
-                    // html += '<table border="1" cellpadding="5"><tr><th>Nama</th><th>Email</th><th>Telepon</th><th>Tanggal</th></tr>';
+            // dataType: 'json',
+            success: function (data) {
 
-                    // $.each(res.data, function (i, row) {
-                    //     html += `<tr>
-                    //         <td>${row.nama}</td>
-                    //         <td>${row.email}</td>
-                    //         <td>${row.telepon}</td>
-                    //         <td>${row.tanggal}</td>
-                    //     </tr>`;
-                    // });
 
-                    html += '</table><br><button id="saveBtn">Simpan ke Database</button>';
-                    $('#preview').html(html);
+				$('#tableArea').html(res.data);
+				$(function () {
+					$("#dataTable").DataTable();
+				})
+                // if (res.status === 'success') {
+                //     // previewData = res.data;
 
-                    if (res.invalid.length > 0) {
-                        $('#response').html('Baris dengan tanggal tidak valid: ' + res.invalid.join(', ')).css('color', 'orange');
-                    }
-                } else {
-                    $('#response').html(res.message).css('color', 'red');
-                }
+				// 	// console.log("hahaha"+res.data);
+                //     // let html = '<h3>Preview Data:</h3>';
+                //     // html += '<table border="1" cellpadding="5"><tr><th>Nama</th><th>Email</th><th>Telepon</th><th>Tanggal</th></tr>';
+
+                //     // $.each(res.data, function (i, row) {
+                //     //     html += `<tr>
+                //     //         <td>${row.nama}</td>
+                //     //         <td>${row.email}</td>
+                //     //         <td>${row.telepon}</td>
+                //     //         <td>${row.tanggal}</td>
+                //     //     </tr>`;
+                //     // });
+
+                //     // html += '</table><br><button id="saveBtn">Simpan ke Database</button>';
+                //     // $('#preview').html(html);
+
+                //     // if (res.invalid.length > 0) {
+                //     //     $('#response').html('Baris dengan tanggal tidak valid: ' + res.invalid.join(', ')).css('color', 'orange');
+                //     // }
+                // } else {
+                //     $('#response').html(res.message).css('color', 'red');
+                // }
             },
             error: function () {
                 $('#response').html('Gagal memproses file.').css('color', 'red');

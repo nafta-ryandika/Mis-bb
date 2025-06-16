@@ -4,23 +4,26 @@
     }
 </style>
 
+<?php
+echo ($inAuditaction . "lalalala");
+?>
+
 <table class="table table-hover" id="dataTable">
     <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Total</th>
+            <!-- <th scope="col">Total</th> -->
         </tr>
     </thead>
     <tbody>
         <?php
         $i = 1;
-        foreach ($vote as $data_vote) :
+        foreach ($previewData as $rowData) :
         ?>
             <tr>
                 <td scope="row"><?= $i ?></td>
-                <td><?= $data_vote['name']; ?></td>
-                <td><?= $data_vote['total']; ?></td>
+                <td><?= $rowData['id']; ?></td>
             </tr>
         <?php
             $i++;

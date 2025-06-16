@@ -68,7 +68,7 @@ class Audit extends CI_Controller
                                 WHERE UCode_Div = '11330000000003'
                             )dt2
                             ON dt1.employee_id = dt2.Kode_Kry
-                            ORDER BY created_at DESC, log_at DESC";
+                            ORDER BY dt1.date_out DESC, dt1.time_in DESC, dt1.created_at DESC, dt1.log_at DESC";
 
         $data['exit_permit'] = $this->db->query($sql_exit_permit)->result_array();
 
@@ -78,6 +78,7 @@ class Audit extends CI_Controller
     public function previewData()
     {
         header('Content-Type: application/json');
+        $data = array();
 
         if (empty($_FILES['file']['name'])) {
             echo json_encode(['status' => 'error', 'message' => 'File Empty !']);
@@ -89,6 +90,8 @@ class Audit extends CI_Controller
             echo json_encode(['status' => 'error', 'message' => 'Format file not valid !']);
             return;
         }
+
+        $inAuditaction = $this->input->post('inAuditaction');
 
         try {
             $spreadsheet = IOFactory::load($_FILES['file']['tmp_name']);
@@ -109,14 +112,28 @@ class Audit extends CI_Controller
                     'id'    => trim($row[0])
                 ];
             }
-
-            echo json_encode([
+            $data = [
                 'status' => 'success',
-                'data'   => $previewData,
-                'invalid' => $invalidRows
-            ]);
+                'previewData'   => $previewData,
+                'invalid' => $invalidRows,
+                'inAuditaction' => $inAuditaction
+            ];
+
+            $this->load->view('audit/view_data', json_encode($data));
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => 'Cant Read File : ' . $e->getMessage()]);
+        }
+
+        if ($_FILES['excel_file']['name']) {
+            $path = $_FILES['excel_file']['tmp_name'];
+            $spreadsheet = IOFactory::load($path);
+            $sheet = $spreadsheet->getActiveSheet()->toArray();
+
+            $data['sheetData'] = $sheet;
+
+            $this->load->view('audit/preview', $data); // return view with table HTML
+        } else {
+            echo 'No file uploaded.';
         }
     }
 

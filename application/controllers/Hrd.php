@@ -63,7 +63,7 @@ class Hrd extends CI_Controller
                                 WHERE UCode_Div = '11330000000003'
                             )dt2
                             ON dt1.employee_id = dt2.Kode_Kry
-                            ORDER BY created_at DESC, log_at DESC";
+                            ORDER BY dt1.date_out DESC, dt1.time_in DESC, dt1.created_at DESC, dt1.log_at DESC";
 
         $data['exit_permit'] = $this->db->query($sql_exit_permit)->result_array();
 
