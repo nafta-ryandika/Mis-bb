@@ -37,7 +37,7 @@ $(document).ready(function() {
             success: function (data) {
 
 
-				$('#tableArea').html(res.data);
+				$('#tableArea').html(data);
 				$(function () {
 					$("#dataTable").DataTable();
 				})
@@ -201,6 +201,8 @@ function viewData() {
 			cache: false,
 			success: function (data) {
 				$('#tableArea').html(data);
+			},
+			complete: function (data) {
 				$(function () {
 					$("#dataTable").DataTable();
 				})

@@ -5,25 +5,32 @@
 </style>
 
 <?php
-echo ($inAuditaction . "lalalala");
+// echo ($inAuditaction . "lalalala");
 ?>
 
 <table class="table table-hover" id="dataTable">
     <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <!-- <th scope="col">Total</th> -->
+            <?php
+            if ($inAuditaction == 1) {
+            ?>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+            <?php
+            }
+            ?>
         </tr>
     </thead>
     <tbody>
         <?php
         $i = 1;
-        foreach ($previewData as $rowData) :
+        foreach ($sheetData as $rowData) :
         ?>
             <tr>
                 <td scope="row"><?= $i ?></td>
-                <td><?= $rowData['id']; ?></td>
+                <?php foreach ($rowData as $cell): ?>
+                    <td><?= htmlspecialchars($cell) ?></td>
+                <?php endforeach; ?>
             </tr>
         <?php
             $i++;

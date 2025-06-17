@@ -77,7 +77,7 @@ class Audit extends CI_Controller
 
     public function previewData()
     {
-        header('Content-Type: application/json');
+        // header('Content-Type: application/json');
         $data = array();
 
         if (empty($_FILES['file']['name'])) {
@@ -93,48 +93,52 @@ class Audit extends CI_Controller
 
         $inAuditaction = $this->input->post('inAuditaction');
 
-        try {
-            $spreadsheet = IOFactory::load($_FILES['file']['tmp_name']);
-            $sheetData = $spreadsheet->getActiveSheet()->toArray();
-
-            if (count($sheetData) <= 1) {
-                echo json_encode(['status' => 'error', 'message' => 'File Empty !']);
-                return;
-            }
-
-            $previewData = [];
-            $invalidRows = [];
-
-            foreach ($sheetData as $index => $row) {
-                if ($index == 0) continue; // skip header
-
-                $previewData[] = [
-                    'id'    => trim($row[0])
-                ];
-            }
-            $data = [
-                'status' => 'success',
-                'previewData'   => $previewData,
-                'invalid' => $invalidRows,
-                'inAuditaction' => $inAuditaction
-            ];
-
-            $this->load->view('audit/view_data', json_encode($data));
-        } catch (Exception $e) {
-            echo json_encode(['status' => 'error', 'message' => 'Cant Read File : ' . $e->getMessage()]);
-        }
-
-        if ($_FILES['excel_file']['name']) {
-            $path = $_FILES['excel_file']['tmp_name'];
+        if ($_FILES['file']['name']) {
+            $path = $_FILES['file']['tmp_name'];
             $spreadsheet = IOFactory::load($path);
             $sheet = $spreadsheet->getActiveSheet()->toArray();
 
-            $data['sheetData'] = $sheet;
+            if (!empty($sheet)) {
+                $data['res'] = "success";
+                $data['sheetData'] = $sheet;
+                $data['inAuditaction'] = $inAuditaction;
+            }
 
-            $this->load->view('audit/preview', $data); // return view with table HTML
+            $this->load->view('audit/view_data', $data); // return view with table HTML
         } else {
             echo 'No file uploaded.';
         }
+        // try {
+        //     $spreadsheet = IOFactory::load($_FILES['file']['tmp_name']);
+        //     $sheetData = $spreadsheet->getActiveSheet()->toArray();
+
+        //     if (count($sheetData) <= 1) {
+        //         echo json_encode(['status' => 'error', 'message' => 'File Empty !']);
+        //         return;
+        //     }
+
+        //     $previewData = [];
+        //     $invalidRows = [];
+
+        //     foreach ($sheetData as $index => $row) {
+        //         if ($index == 0) continue; // skip header
+
+        //         $previewData[] = [
+        //             'id'    => trim($row[0])
+        //         ];
+        //     }
+        //     $data = [
+        //         'status' => 'success',
+        //         'previewData'   => $previewData,
+        //         'invalid' => $invalidRows,
+        //         'inAuditaction' => $inAuditaction
+        //     ];
+
+        //     $this->load->view('audit/view_data', json_encode($data));
+        // } catch (Exception $e) {
+        //     echo json_encode(['status' => 'error', 'message' => 'Cant Read File : ' . $e->getMessage()]);
+        // }
+
     }
 
     public function check()
