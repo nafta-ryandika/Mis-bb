@@ -77,17 +77,13 @@ class Audit extends CI_Controller
 
     public function previewData()
     {
-        // header('Content-Type: application/json');
         $data = array();
 
-        if (empty($_FILES['file']['name'])) {
-            echo json_encode(['status' => 'error', 'message' => 'File Empty !']);
-            return;
-        }
-
         $file_format = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+
         if (!in_array($_FILES['file']['type'], $file_format)) {
-            echo json_encode(['status' => 'error', 'message' => 'Format file not valid !']);
+            http_response_code(400);
+            echo "Format file not valid !";
             return;
         }
 
@@ -106,39 +102,68 @@ class Audit extends CI_Controller
 
             $this->load->view('audit/view_data', $data); // return view with table HTML
         } else {
-            echo 'No file uploaded.';
+            http_response_code(400);
+            echo "No file uploaded !";
         }
-        // try {
-        //     $spreadsheet = IOFactory::load($_FILES['file']['tmp_name']);
-        //     $sheetData = $spreadsheet->getActiveSheet()->toArray();
+    }
 
-        //     if (count($sheetData) <= 1) {
-        //         echo json_encode(['status' => 'error', 'message' => 'File Empty !']);
-        //         return;
-        //     }
+    public function uploadData()
+    {
+        $data = array();
+        $id = "";
 
-        //     $previewData = [];
-        //     $invalidRows = [];
+        $file_format = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
 
-        //     foreach ($sheetData as $index => $row) {
-        //         if ($index == 0) continue; // skip header
+        if (!in_array($_FILES['file']['type'], $file_format)) {
+            http_response_code(400);
+            echo "Format file not valid !";
+            return;
+        }
 
-        //         $previewData[] = [
-        //             'id'    => trim($row[0])
-        //         ];
-        //     }
-        //     $data = [
-        //         'status' => 'success',
-        //         'previewData'   => $previewData,
-        //         'invalid' => $invalidRows,
-        //         'inAuditaction' => $inAuditaction
-        //     ];
+        $inAuditaction = $this->input->post('inAuditaction');
 
-        //     $this->load->view('audit/view_data', json_encode($data));
-        // } catch (Exception $e) {
-        //     echo json_encode(['status' => 'error', 'message' => 'Cant Read File : ' . $e->getMessage()]);
-        // }
+        if ($_FILES['file']['name']) {
+            $path = $_FILES['file']['tmp_name'];
+            $spreadsheet = IOFactory::load($path);
+            $sheet = $spreadsheet->getActiveSheet()->toArray();
 
+            if (!empty($sheet)) {
+                if ($inAuditaction == 1) {
+                    foreach ($sheet as $i => $row) {
+                        if ($i == 0 || empty(array_filter($row))) continue;
+                        $id .= "'" . $row[0] . "',";
+                    }
+                }
+
+                $id = rtrim($id, ",");
+            }
+
+            if ($inAuditaction == 1) {
+                $table = "`hrms`.audit_bb_tb_m_kry";
+            }
+
+            $query = "TRUNCATE " . $table;
+
+            if (! $this->db->query($query)) {
+                http_response_code(400);
+                echo "Error Truncate Table " . $table . " !";
+            }
+
+            $query1 = "INSERT INTO " . $table . " 
+                       SELECT * FROM hrms.tb_m_kry a WHERE a.Stat = 'Aktif' AND a.Ucode_Div = '11330000000003' AND a.Kode_Kry IN (" . $id . ");";
+
+            if (! $this->db->query($query1)) {
+                http_response_code(400);
+                echo "Error Insert Table " . $table . " !";
+            } else {
+                // http_response_code(500);
+                echo "Success !";
+            }
+            // $this->load->view('audit/view_data', $data); // return view with table HTML
+        } else {
+            http_response_code(400);
+            echo "No file uploaded !";
+        }
     }
 
     public function check()

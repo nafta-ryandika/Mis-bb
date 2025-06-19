@@ -1,9 +1,7 @@
 var upload_data = [];
 
-$(document).ready(function() {
-	$('#uploadForm').on('submit', function (e) {
-		e.preventDefault();
-
+$(document).ready(function() { 
+	$('#btnPreview').on('click',function(){
 		var inFile = $('#inFile1')[0].files[0];
     	var inAuditaction = $('#inAuditaction').val();
 
@@ -21,56 +19,94 @@ $(document).ready(function() {
 				timer: 1000
 			})
 			return;
+		} else {
+			$('#uploadForm').submit(function(e){
+				e.preventDefault();
+
+				var formData = new FormData(this);
+				formData.append('file', inFile);
+				formData.append('inAuditaction', inAuditaction);
+
+				$.ajax({
+					url: base_url+'audit/previewData',
+					type: 'POST',
+					data: formData,
+					contentType: false,
+					processData: false,
+					success: function (data) {
+							$('#tableArea').html(data);
+							$(function () {
+								$("#dataTable").DataTable();
+							})
+					},
+					error: function (xhr, status, error) {
+						Swal.fire({
+							title: data.err,
+							icon: "error",
+							timer: 1000
+						})
+					}
+				});
+			})
 		}
+	})
 
-		const formData = new FormData(this);
-		formData.append('file', inFile);
-		formData.append('inAuditaction', inAuditaction);
+	$('#btnUpload').on('click',function(){
+		var inFile = $('#inFile1')[0].files[0];
+    	var inAuditaction = $('#inAuditaction').val();
 
-		$.ajax({
-            url: base_url+'audit/previewData',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            // dataType: 'json',
-            success: function (data) {
+		if (!inAuditaction) {
+			Swal.fire({
+				title: "Input Parameter Empty !",
+				icon: "error",
+				timer: 1000
+			})
+			return;
+		} else if (!inFile) {
+			Swal.fire({
+				title: "Input File Empty !",
+				icon: "error",
+				timer: 1000
+			})
+			return;
+		} else {
+			$('#uploadForm').submit(function(e){
+				e.preventDefault();
 
+				var formData = new FormData(this);
+				formData.append('file', inFile);
+				formData.append('inAuditaction', inAuditaction);
 
-				$('#tableArea').html(data);
-				$(function () {
-					$("#dataTable").DataTable();
-				})
-                // if (res.status === 'success') {
-                //     // previewData = res.data;
-
-				// 	// console.log("hahaha"+res.data);
-                //     // let html = '<h3>Preview Data:</h3>';
-                //     // html += '<table border="1" cellpadding="5"><tr><th>Nama</th><th>Email</th><th>Telepon</th><th>Tanggal</th></tr>';
-
-                //     // $.each(res.data, function (i, row) {
-                //     //     html += `<tr>
-                //     //         <td>${row.nama}</td>
-                //     //         <td>${row.email}</td>
-                //     //         <td>${row.telepon}</td>
-                //     //         <td>${row.tanggal}</td>
-                //     //     </tr>`;
-                //     // });
-
-                //     // html += '</table><br><button id="saveBtn">Simpan ke Database</button>';
-                //     // $('#preview').html(html);
-
-                //     // if (res.invalid.length > 0) {
-                //     //     $('#response').html('Baris dengan tanggal tidak valid: ' + res.invalid.join(', ')).css('color', 'orange');
-                //     // }
-                // } else {
-                //     $('#response').html(res.message).css('color', 'red');
-                // }
-            },
-            error: function () {
-                $('#response').html('Gagal memproses file.').css('color', 'red');
-            }
-        });
+				$.ajax({
+					url: base_url+'audit/uploadData',
+					type: 'POST',
+					data: formData,
+					contentType: false,
+					processData: false,
+					success: function (data) {
+						Swal.fire({
+							title: "Thank You!",
+							icon: "success",
+							timer: 1000
+						}).then(function () { 
+							// $('#modalAdd').modal('toggle', function () {
+							// 	setTimeout(function(){
+							// 		$('#inId').focus();
+							// 	},100);
+							// 	clear('vote','');
+							// })
+						});
+					},
+					error: function (xhr, status, error) {
+						Swal.fire({
+							title: data.err,
+							icon: "error",
+							timer: 1000
+						})
+					}
+				});
+			})
+		}
 	})
 });
 

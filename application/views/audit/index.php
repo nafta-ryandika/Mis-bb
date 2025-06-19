@@ -52,7 +52,7 @@
                                 </div>
 
                                 <button type="submit" class="col-1 btn btn-success ml-2" id="btnPreview" title="Preview">Preview</button>
-                                <button type="submit" class="col-1 btn btn-success ml-2" id="btnUpload" title="Upload" onclick="upload()">Upload</button>
+                                <button class="col-1 btn btn-success ml-2" id="btnUpload" title="Upload">Upload</button>
 
                                 <button type="button" class="col-1 btn btn-secondary ml-2" id="btnTemplate" title="Template">Template</button>
                             </div>
