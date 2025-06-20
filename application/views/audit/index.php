@@ -20,7 +20,7 @@
                                     <div class="col-12 m-2">
                                         <div class="form-group row">
                                             <div class="col-4">
-                                                <select class="form-control" id="inAuditaction" style="width: 100%;">
+                                                <select class="form-control" id="inAuditaction" style="width: 100%;" onchange="set(this,'')">
                                                     <option value="" disabled selected hidden>Action</option>
                                                     <?php
                                                     foreach ($audit_action as $data_audit_action) :
@@ -41,18 +41,37 @@
                 </div>
             </div>
 
-            <div class="card shadow mt-4 mb-4">
-                <div class="row col-12 mt-2 mb-2" id="form1">
+            <div class="card shadow mt-4 mb-4 formArea" id="form1" style="display: none;">
+                <div class="row col-12 mt-2 mb-2">
                     <div class="col-12 form-group m-2">
                         <form id="uploadForm" enctype="multipart/form-data">
                             <div class="d-flex flex-wrap align-items-center">
                                 <div class="col-4 custom-file mr-2" style="flex: 1 1 auto; min-width: 250px;">
-                                    <input type="file" class="custom-file-input" id="inFile1" name="file" accept=".xls,.xlsx" required>
+                                    <input type="file" class="custom-file-input" id="inFile1" name="file" accept=".xls,.xlsx">
                                     <label class="custom-file-label" for="inFile1">Choose file</label>
                                 </div>
 
                                 <button type="submit" class="col-1 btn btn-success ml-2" id="btnPreview" title="Preview">Preview</button>
                                 <button class="col-1 btn btn-success ml-2" id="btnUpload" title="Upload">Upload</button>
+
+                                <button type="button" class="col-1 btn btn-secondary ml-2" id="btnTemplate" title="Template">Template</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mt-4 mb-4 formArea" id="form2" style="display: none;">
+                <div class="row col-12 mt-2 mb-2 fromArea">
+                    <div class="col-12 form-group m-2">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="d-flex flex-wrap align-items-center">
+                                <div class="col-4 custom-file mr-2" style="flex: 1 1 auto; min-width: 250px;">
+                                    <input type="file" class="custom-file-input" id="inFile1" name="file" accept=".xls,.xlsx">
+                                    <label class="custom-file-label" for="inFile1">Choose file</label>
+                                </div>
+
+                                <button type="submit" class="col-1 btn btn-success ml-2" id="btnPreview" title="Preview">Previeww</button>
+                                <button class="col-1 btn btn-success ml-2" id="btnUpload" title="Upload">Uplowwad</button>
 
                                 <button type="button" class="col-1 btn btn-secondary ml-2" id="btnTemplate" title="Template">Template</button>
                             </div>

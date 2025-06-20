@@ -128,7 +128,7 @@ class Audit extends CI_Controller
             $sheet = $spreadsheet->getActiveSheet()->toArray();
 
             if (!empty($sheet)) {
-                if ($inAuditaction == 1) {
+                if ($inAuditaction == 1 || $inAuditaction == 2) {
                     foreach ($sheet as $i => $row) {
                         if ($i == 0 || empty(array_filter($row))) continue;
                         $id .= "'" . $row[0] . "',";
@@ -140,6 +140,10 @@ class Audit extends CI_Controller
 
             if ($inAuditaction == 1) {
                 $table = "`hrms`.audit_bb_tb_m_kry";
+                $division_id = '11330000000003';
+            } else if ($inAuditaction == 2) {
+                $table = "`hrms`.audit_mmp_tb_m_kry";
+                $division_id = '11330000000001';
             }
 
             $query = "TRUNCATE " . $table;
@@ -150,7 +154,9 @@ class Audit extends CI_Controller
             }
 
             $query1 = "INSERT INTO " . $table . " 
-                       SELECT * FROM hrms.tb_m_kry a WHERE a.Stat = 'Aktif' AND a.Ucode_Div = '11330000000003' AND a.Kode_Kry IN (" . $id . ");";
+                       SELECT * FROM hrms.tb_m_kry a WHERE a.Stat = 'Aktif' AND a.Ucode_Div = '" . $division_id . "' AND a.Kode_Kry IN (" . $id . ");";
+
+            echo $query1;
 
             if (! $this->db->query($query1)) {
                 http_response_code(400);

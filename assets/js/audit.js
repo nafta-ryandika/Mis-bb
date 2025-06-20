@@ -1,5 +1,3 @@
-var upload_data = [];
-
 $(document).ready(function() { 
 	$('#btnPreview').on('click',function(){
 		var inFile = $('#inFile1')[0].files[0];
@@ -117,7 +115,19 @@ $(function () {
 })
 
 
-function set(){
+function set(param,obj){
+	if (param.id == 'inAuditaction') {
+		var inAuditaction = $('#'+param.id).val();
+
+		if (inAuditaction == 1 || inAuditaction == 2) {
+			$('.formArea').hide();
+			$('#form1').show();
+		} else if (inAuditaction == 3) {
+			$('.formArea').hide();
+			$('#form2').show();
+		}
+	}
+
 	var inAuditaction = $("#inAuditaction").val().trim();
 
 	if (inAuditaction == "") {
